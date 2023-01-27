@@ -1,0 +1,143 @@
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| company            |
+| faculty            |
+| mysql              |
+| orders             |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use company;
+Database changed
+mysql> desc company;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | varchar(14) | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| age   | int(10)     | NO   | PRI | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table company add primary key (age);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> desc company;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | varchar(14) | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| age   | int(10)     | NO   | PRI | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create database company;
+ERROR 1007 (HY000): Can't create database 'company'; database exists
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| company            |
+| faculty            |
+| mysql              |
+| orders             |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use company;
+Database changed
+mysql> create table student(orderid int(15),mobileno int(10),cost int(12));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> use company;
+Database changed
+mysql> create table orders(orderid int(15),mobileno int(12),product varchar(10));
+ERROR 1050 (42S01): Table 'orders' already exists
+mysql> desc company;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | varchar(14) | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| age   | int(10)     | NO   | PRI | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | varchar(12) | YES  |     | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table orders add foreign key (cost) references company (age);
+Query OK, 0 rows affected (0.33 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | varchar(12) | YES  |     | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table orders add unique(orderid);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | varchar(12) | YES  | UNI | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table orders add check(product);
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc orders;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| orderid | varchar(12) | YES  | UNI | NULL    |       |
+| product | varchar(10) | YES  |     | NULL    |       |
+| cost    | int(6)      | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.05 sec)
+
+mysql>

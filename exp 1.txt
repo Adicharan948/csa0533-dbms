@@ -1,0 +1,134 @@
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database college;
+ERROR 1007 (HY000): Can't create database 'college'; database exists
+mysql> show databases college;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'college' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| faculty            |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use college;
+Database changed
+mysql> create table student(regno int(3),name varchar(15),gender varchar(1),dob date,mobileno int(10),city varchar(15));
+ERROR 1050 (42S01): Table 'student' already exists
+mysql> desc student;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| regno          | int(3)      | YES  |     | NULL    |       |
+| name           | varchar(15) | YES  |     | NULL    |       |
+| gender         | varchar(1)  | YES  |     | NULL    |       |
+| dateofbirth    | date        | YES  |     | NULL    |       |
+| mobilenumber   | int(10)     | YES  |     | NULL    |       |
+| locationofstay | varchar(15) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| college            |
+| faculty            |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use college;
+Database changed
+mysql> create table faculty(facno varchar(4),facname varchar(15),gender varchar(1),dob date,doj date,mobileno int910));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int910))' at line 1
+mysql> create table faculty(facno varchar(4),facname varchar(15),gender varchar(1),dob date,doj date,mobileno int(10));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> alter table faculty add city varchar(12);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> drop column dob;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column dob' at line 1
+mysql> alter table faculty drop column dob;
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> truncate table faculty;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | YES  |     | NULL    |       |
+| gender   | varchar(1)  | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| city     | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
