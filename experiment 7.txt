@@ -1,0 +1,83 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mates;
+Database changed
+mysql> select * from course;
++----------+-----------+---------------+--------+
+| courseno | regno     | coursedesc    | scores |
++----------+-----------+---------------+--------+
+|      101 | 192111672 | physics       |     78 |
+|      102 | 192111812 | OOAD          |     81 |
+|      103 | 192111512 | r programming |     90 |
++----------+-----------+---------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select courseno,count(courseno) from course group by courseno;
++----------+-----------------+
+| courseno | count(courseno) |
++----------+-----------------+
+|      101 |               1 |
+|      102 |               1 |
+|      103 |               1 |
++----------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select courseno,count(scores) from course group by courseno;
++----------+---------------+
+| courseno | count(scores) |
++----------+---------------+
+|      101 |             1 |
+|      102 |             1 |
+|      103 |             1 |
++----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from studs;
++------+----------+------+------+--------+
+| sno  | name     | dept | DOB  | gender |
++------+----------+------+------+--------+
+|  101 | kira     | cse  | 2000 | M      |
+|  102 | almight  | cse  | 2001 | M      |
+|  103 | shinichi | cse  | 2000 | M      |
+|  104 | nobara   | cse  | 2000 | f      |
++------+----------+------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select name,DOB from studs by sno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by sno' at line 1
+mysql> select name,DOB from studs by order by sno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by order by sno' at line 1
+mysql>  select name,DOB from studs order by sno;
++----------+------+
+| name     | DOB  |
++----------+------+
+| kira     | 2000 |
+| almight  | 2001 |
+| shinichi | 2000 |
+| nobara   | 2000 |
++----------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studs order by DOB;
++------+----------+------+------+--------+
+| sno  | name     | dept | DOB  | gender |
++------+----------+------+------+--------+
+|  101 | kira     | cse  | 2000 | M      |
+|  103 | shinichi | cse  | 2000 | M      |
+|  104 | nobara   | cse  | 2000 | f      |
+|  102 | almight  | cse  | 2001 | M      |
++------+----------+------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql>

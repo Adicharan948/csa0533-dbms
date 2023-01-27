@@ -1,0 +1,89 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mates;
+Database changed
+mysql> create table course(courseno int(15),regno int(15),coursedesc varchar(15),scores int(15));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into course values(101,192111672,'physics',78);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into course values(102,192111812,'OOAD',81);
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into course values(103,192111512,'r programming',90);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from course;
++----------+-----------+---------------+--------+
+| courseno | regno     | coursedesc    | scores |
++----------+-----------+---------------+--------+
+|      101 | 192111672 | physics       |     78 |
+|      102 | 192111812 | OOAD          |     81 |
+|      103 | 192111512 | r programming |     90 |
++----------+-----------+---------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select courseno from course where scores between 70 and 85;
++----------+
+| courseno |
++----------+
+|      101 |
+|      102 |
++----------+
+2 rows in set (0.01 sec)
+
+mysql> select avg(scores) from course;
++-------------+
+| avg(scores) |
++-------------+
+|     83.0000 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> select max(scores),min(scores) from course;
++-------------+-------------+
+| max(scores) | min(scores) |
++-------------+-------------+
+|          90 |          78 |
++-------------+-------------+
+1 row in set (0.02 sec)
+
+mysql> select max(scores),min(scores),avg(scores) from course;
++-------------+-------------+-------------+
+| max(scores) | min(scores) | avg(scores) |
++-------------+-------------+-------------+
+|          90 |          78 |     83.0000 |
++-------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(scores) from course;
++-------------+
+| sum(scores) |
++-------------+
+|         249 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select coursedesc,count(coursetype) from course;
+ERROR 1054 (42S22): Unknown column 'coursetype' in 'field list'
+mysql>  select courseno,coursedesc,count(regno) from course where regno like '192111672';
++----------+------------+--------------+
+| courseno | coursedesc | count(regno) |
++----------+------------+--------------+
+|      101 | physics    |            1 |
++----------+------------+--------------+
+1 row in set (0.02 sec)
+
+mysql>
