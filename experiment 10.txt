@@ -1,0 +1,60 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table customers(Id int(10), Name varchar(30), Salary int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> insert into customers values(1, "Muffy", 50000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into customers values(2, "John", 70000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into customers values(3, "Jackson", 80000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from customers;
++------+---------+--------+
+| Id   | Name    | Salary |
++------+---------+--------+
+|    1 | Muffy   |  50000 |
+|    2 | John    |  70000 |
+|    3 | Jackson |  80000 |
++------+---------+--------+
+
+mysql> create view customers_view as select name, salary from customers;
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> select * from customers_view;
++---------+--------+
+| name    | salary |
++---------+--------+
+| Muffy   |  50000 |
+| John    |  70000 |
+| Jackson |  80000 |
++---------+--------+
+3 rows in set (0.20 sec)
+
+mysql> create index regno on customers(name);
+Query OK, 0 rows affected (0.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index from customers;
++-----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table     | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++-----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| customers |          1 | regno    |            1 | Name        | A         |           3 |     NULL | NULL   | YES  | BTREE      |         |               |
++-----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+1 row in set (0.09 sec)
+
+mysql>

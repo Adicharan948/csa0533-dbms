@@ -1,0 +1,47 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from faculty order by DOJ limit 2;
++-------+---------+--------+-----+-----+----------+--------+
+| FacNo | FacName | Gender | DOB | DOJ | MobileNo | DeptNo |
++-------+---------+--------+-----+-----+----------+--------+
+|     2 | Smitha  | F      |  20 |   2 |   452538 | CSC    |
+|     3 | Smith   | M      |  30 |   4 |    45318 | IT     |
++-------+---------+--------+-----+-----+----------+--------+
+2 rows in set (0.00 sec)
+mysql> select * from course;
++----------+-----------+---------------+-------+-----------+
+| courseno | RegNo     | course_Sub    | marks | assesment |
++----------+-----------+---------------+-------+-----------+
+|        4 | 192124112 | AI            |    75 |      NULL |
+|        2 | 192124132 | C Programming |    82 |      NULL |
+|        3 | 192124133 | AI            |    58 |        10 |
+|        1 | 192124145 | Maths         |    97 |      NULL |
+|        5 | 192124166 | Maths         |    88 |      NULL |
+|        5 | 192124177 | IT            |    28 |        16 |
+|        2 | 192124187 | DBMS          |    67 |      NULL |
+|        3 | 192124193 | OS            |    69 |      NULL |
+|        4 | 192124199 | IT            |    49 |        13 |
++----------+-----------+---------------+-------+-----------+
+9 rows in set (0.00 sec)
+mysql> select course_sub, assesment from course where marks > (select avg(marks) from course) order by courseno;
++---------------+-----------+
+| course_sub    | assesment |
++---------------+-----------+
+| Maths         |      NULL |
+| C Programming |      NULL |
+| OS            |      NULL |
+| AI            |      NULL |
+| Maths         |      NULL |
++---------------+-----------+
+5 rows in set (0.06 sec)

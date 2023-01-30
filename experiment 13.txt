@@ -1,0 +1,127 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE TABLE Players(
+    ->    ID INT,
+    ->    First_Name VARCHAR(255),
+    ->    Last_Name VARCHAR(255),
+    ->    Date_Of_Birth date,
+    ->    Place_Of_Birth VARCHAR(255),
+    ->    Country VARCHAR(255),
+    ->    PRIMARY KEY (ID)
+    -> );
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> insert into Players values(1, 'Eimi', 'Fukada', DATE('1981-12-05'), 'Delhi', 'India');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into Players values(2, 'Joseph', 'Joestar', DATE('1981-04-22'), 'CapeTown', 'SouthAfrica');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Players values(3, 'Kira', 'Yoshikage', DATE('1977-10-27'), 'Matale', 'Srilanka');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Players values(4, 'Mikasa', 'Ackerman', DATE('1988-11-05'), 'Delhi', 'India');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> Delete from Players where id = 4;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM Players;
++----+------------+------------+---------------+----------------+-------------+
+| ID | First_Name | Last_Name  | Date_Of_Birth | Place_Of_Birth | Country     |
++----+------------+------------+---------------+----------------+-------------+
+|  1 | Eimi       | Fukada     | 1981-12-05    | Delhi          | India       |
+|  2 | Joseph     | Joestar    | 1981-04-22    | CapeTown       | SouthAfrica |
+|  3 | Kira       | Yoshikage  | 1977-10-27    | Matale         | Srilanka    |
++----+------------+------------+---------------+----------------+-------------+
+3 rows in set (0.02 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM Players;
++----+------------+------------+---------------+----------------+-------------+
+| ID | First_Name | Last_Name  | Date_Of_Birth | Place_Of_Birth | Country     |
++----+------------+------------+---------------+----------------+-------------+
+|  1 | Eimi       | Fukada     | 1981-12-05    | Delhi          | India       |
+|  2 | Joseph     | Joestar    | 1981-04-22    | CapeTown       | SouthAfrica |
+|  3 | Kira       | Yoshikage  | 1977-10-27    | Matale         | Srilanka    |
+|  4 | Mikasa     | Ackerman   | 1988-11-05    | Delhi          | India       |
++----+------------+------------+---------------+----------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE EMP(
+    ->    FIRST_NAME CHAR(20) NOT NULL,
+    ->    LAST_NAME CHAR(20),
+    ->    AGE INT,
+    ->    SEX CHAR(1),
+    ->    INCOME FLOAT);
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> INSERT INTO EMP VALUES
+    ->    ('Krishna', 'Sharma', 19, 'M', 2000);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO EMP VALUES
+    -> ('Raj', 'Kandukuri', 20, 'M', 7000);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO EMP VALUES
+    -> ('Ramya', 'Ramapriya', 25, 'F', 5000)
+    -> ;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> SELECT * FROM EMP;
++------------+-----------+------+------+--------+
+| FIRST_NAME | LAST_NAME | AGE  | SEX  | INCOME |
++------------+-----------+------+------+--------+
+| Krishna    | Sharma    |   20 | M    |   2000 |
+| Raj        | Kandukuri |   21 | M    |   7000 |
+| Ramya      | Ramapriya |   26 | F    |   5000 |
++------------+-----------+------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE EMP SET AGE = AGE + 1;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql>
+mysql> SAVEPOINT samplesavepoint;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO EMP values ('Mac', 'Mohan', 26, 'M', 2000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> ROLLBACK TO SAVEPOINT samplesavepoint;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> SELECT * FROM EMP;
++------------+-----------+------+------+--------+
+| FIRST_NAME | LAST_NAME | AGE  | SEX  | INCOME |
++------------+-----------+------+------+--------+
+| Krishna    | Sharma    |   21 | M    |   2000 |
+| Raj        | Kandukuri |   22 | M    |   7000 |
+| Ramya      | Ramapriya |   27 | F    |   5000 |
++------------+-----------+------+------+--------+
+3 rows in set (0.00 sec)
